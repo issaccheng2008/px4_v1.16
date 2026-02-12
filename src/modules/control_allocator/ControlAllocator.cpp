@@ -682,23 +682,24 @@ ControlAllocator::publish_actuator_controls()
 		++actuator_idx_matrix[selected_matrix];
 		++actuator_idx;
 	}
-	if(motors_idx==5){
+	//if(motors_idx==6){
 		actuator_motors.control[4]=(actuator_motors.control[0]+actuator_motors.control[1])/2.0f;
 		actuator_motors.control[5]=(actuator_motors.control[2]+actuator_motors.control[3])/2.0f;
-		int tmp,mini,ad;
-		mini=actuator_motors.control[0]<actuator_motors.control[1]?actuator_motors.control[0]:actuator_control[1];
+		float tmp,mini;
+		//int ad
+		mini=actuator_motors.control[0]<actuator_motors.control[1]?actuator_motors.control[0]:actuator_motors.control[1];
 		tmp=actuator_motors.control[0];
 		actuator_motors.control[0]=actuator_motors.control[1]-mini;
 		actuator_motors.control[1]=tmp-mini;
-		ad=actuator_motors.control[0]+actuator_motors.control[1];
-		mini=actuator_motors.control[2]<actuator_motors.control[3]?actuator_motors.control[2]:actuator_control[3];
+		//ad=actuator_motors.control[0]+actuator_motors.control[1];
+		mini=actuator_motors.control[2]<actuator_motors.control[3]?actuator_motors.control[2]:actuator_motors.control[3];
 		tmp=actuator_motors.control[2];
 		actuator_motors.control[2]=actuator_motors.control[3]-mini;
 		actuator_motors.control[3]=tmp-mini;
-		ad+=actuator_motors.control[2]+actuator_motors.control[3];
+		//ad+=actuator_motors.control[2]+actuator_motors.control[3];
 		// actuator_motors.control[4]+=ad/2.0f;
 		// actuator_motors.control[5]+=ad/2.0f;
-	}
+	//}
 	for (int i = motors_idx; i < actuator_motors_s::NUM_CONTROLS; i++) {
 		actuator_motors.control[i] = NAN;
 	}
