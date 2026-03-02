@@ -45,6 +45,7 @@
 #include <circuit_breaker/circuit_breaker.h>
 #include <mathlib/math/Limits.hpp>
 #include <mathlib/math/Functions.hpp>
+#include <cmath>
 
 using namespace matrix;
 using namespace time_literals;
@@ -689,13 +690,13 @@ ControlAllocator::publish_actuator_controls()
 		//int ad
 		mini=actuator_motors.control[0]<actuator_motors.control[1]?actuator_motors.control[0]:actuator_motors.control[1];
 		tmp=actuator_motors.control[0];
-		actuator_motors.control[0]=actuator_motors.control[1]-mini;
-		actuator_motors.control[1]=tmp-mini;
+		actuator_motors.control[0]=std::pow(actuator_motors.control[1]-mini,0.8f);
+		actuator_motors.control[1]=std::pow(tmp-mini,0.8f);
 		//ad=actuator_motors.control[0]+actuator_motors.control[1];
 		mini=actuator_motors.control[2]<actuator_motors.control[3]?actuator_motors.control[2]:actuator_motors.control[3];
 		tmp=actuator_motors.control[2];
-		actuator_motors.control[2]=actuator_motors.control[3]-mini;
-		actuator_motors.control[3]=tmp-mini;
+		actuator_motors.control[2]=std::pow(actuator_motors.control[3]-mini,0.8f);
+		actuator_motors.control[3]=std::pow(tmp-mini,0.8f);
 		//ad+=actuator_motors.control[2]+actuator_motors.control[3];
 		// actuator_motors.control[4]+=ad/2.0f;
 		// actuator_motors.control[5]+=ad/2.0f;
